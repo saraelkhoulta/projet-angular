@@ -1,0 +1,160 @@
+
+<app-header></app-header>
+<div class="container">
+<div class="row">
+    <div class="col-sm-12">
+       
+        <router-outlet></router-outlet>
+    </div>
+</div>
+
+</div>
+
+<!--Interpolation il transforme tout en string-->
+
+<!--{{user}} il va afficher [object Object] car il essaye de transferer ce objet a string => on doit tjrs ajouter la pipe (json)
+{{user|json}}
+-->
+
+<!--
+<h1>PonyRacer</h1>
+<h2>Welcome {{ user1?.name }}</h2> page:58   -->
+
+
+<!--Property binding-->
+    <!--<button [disabled]=" isDesabled" >click me</button>
+    <img [src]=imgSrc> on peur pas faire ca <img src="{{ pony.avatar.url }}" =>car {{ https://placeimg.com/640/480/any
+     }}, qui n’est pas une URL valide -->
+    <!--<p [textContent]="user.name"></p> egale a {{user.name}}-->
+
+<!--event Property-->
+   <!--
+   <button (click)="OnClick($event)">Click me</button>
+   <input (input)="OnInput($event)">
+   <textarea (keydown.space)="onSpacePress($event)">Press space!</textarea> si tu clique sur espace-->
+
+
+<!--Variables locales p:60
+ 
+    <button (click)="name.focus()">Focus the input</button>-->
+
+    <!--<input type="text" #nom>  j'ai pu acceder a un element dans DOM
+    {{nom.value}}-->
+
+     <!--<app-youtube-player  #player [songPlayer]="nom.value"></app-youtube-player> a partir de #player je peux acceder a un composant
+    <button (click)="player.play()">Play</button>
+    <button (click)="player.pause()">Pause</button>-->
+  <!--@viewChild
+    <input type="text" #songTitle>  
+    <button (click)='Onclick()'>Click</button>
+    <app-youtube-player  [songPlayer]="songTitle.value"></app-youtube-player> 
+   
+    <button (click)="youtube.play()">Play</button>
+    <button (click)="youtube.pause()">Pause</button>
+    -->
+    <!--@viewChildren
+    <input type="text" #songTitle1>  
+    <input type="text" #songTitle2>  
+    <app-youtube-player  [songPlayer]="songTitle1.value"></app-youtube-player> 
+    <app-youtube-player  [songPlayer]="songTitle2.value"></app-youtube-player> 
+    <button (click)='Onclick()'>Click</button>-->
+    
+
+<!--directive structurelle -->
+
+    <!-- *ngIf p:60
+      <div *ngIf="isVisible ;else nocondition">is visible</div>
+      <ng-template #nocondition>not visible</ng-templaste>
+      <button (click)="isVisible = !isVisible">check me</button>
+
+      <input type ="text" #name>
+      <div *ngIf="name.value==name1 ;else notTrue">is true</div>
+      <ng-template #notTrue>notTRue</ng-template>-->
+
+    <!--*ngFor p:60-->
+
+         <!--<div *ngFor ="let race of races index as i   last as l   first as f  odd as o  even as e">{{i}}-{{race.name}} -{{l}} -{{f}} - {{o}} -{{e}}</div>  
+          on peut ecrire  aussi let i =index au lieu de index as i -->
+
+
+
+    <!--ngSwitch p:61
+      <div [ngSwitch]=messageCount>
+        <p *ngSwitchCase="0">You have no message</p>
+        <p *ngSwitchCase="1">You have a message</p>
+        <p *ngSwitchDefault>You have some messages</p>
+      </div>-->
+
+
+<!--directive standard -->
+    <!--ngStyle
+    <div [ngStyle]="{fontWeight: fontWeight, color: color}">I've got style</div>-->
+
+
+    <!--les pipes-->
+      <!--json
+      {{user|json}}
+      <p [textContent]="user | json"></p>-->
+
+      <!--sliceselect  :Si tu as envie de n’afficher qu’un sous-ensemble d’une collection
+      <p>{{ ponies | slice:0:2 | json }}</p>--> 
+
+      <!--<p>{{ 'Ninja Squad' | slice:3 }}</p> Si tu passes à slice seulement un entier positif N, il prendra les éléments de N à la fin  :ja Squad-->
+     <!-- <p>{{ 'Ninja Squad' | slice:-5 }}</p>Si tu lui passes un entier négatif, il prendra les N derniers éléments :Squad-->
+      <!--<div *ngFor="let كدابين بصوتكم | Kadabeen Covers
+nbr | json }}</p> 
+      <div *ngFor="let rac of races| slice: 0:2 as total; index as i">
+        {{ i + 1 }}/{{ total.length }}: {{ rac.name }}
+        </div>-->
+
+        <!-- keyvalue ("clé valeur")  p:66
+        <div *ngFor="let user of userMap| keyvalue">
+            {{user.key }} -{{ user.value.name }}
+        </div>-->
+        <!--uppercase  : ce pipe transforme une chaîne de caractères dans sa version MAJUSCULE
+
+        <p>{{ 'Ninja Squad' | uppercase }}</p>-->
+
+        <!--lowercase  :   ce pipe transforme une chaîne de caractères dans sa version minuscule
+        <p>{{ 'Ninja Squad' | lowercase }}</p>-->
+
+        <!--titlecase ("titre"):change la première lettre de chaque mot en majuscule :
+        <p>{{ 'ninja squad' | titlecase }}</p>-->
+
+        <!-- Date-->
+        
+        <!--<p>{{ today | date:'dd/MM/yyyy' }}</p> 16/03/2020-->
+        <!--<p>{{ today | date:'longDate' }}</p>March 16, 2020-->
+        <!--<p>{{ today| date:'HH:mm' }}</p>09:08-->
+        <!--<p>{{ today | date:'shortTime' }}</p>9:08 AM-->
+
+        <!--Async :Le pipe async permet d’afficher des données obtenues de manière asynchrone
+        <p>{{asyncExemple|async}}</p>-->
+       
+
+<!--ngContent
+        <app-example>
+          hello
+          <div class="partie1"> 
+            partie1 
+          <p>P de partie 1</p>
+          
+          </div>
+          <div class="partie2"> partie 2</div>
+          <app-title></app-title>
+          <app-body></app-body>
+        </app-example>-->
+
+
+<!--ngOnchang
+        <app-example  [title]="title" >
+          <input type="text" class="mycontent" #mycontent>
+          <input type="text" class="title1" #title1>
+          <input type="text" class="title2" #title2>
+        </app-example>
+        <button (click)="title.label='java'">click1</button>
+        <button (click)="title={label:'JS'}">click2</button>
+-->
+      
+
+          
